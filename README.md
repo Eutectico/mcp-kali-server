@@ -30,7 +30,8 @@ A Model Context Protocol (MCP) server that provides access to Kali Linux securit
 
 ## Prerequisites
 
-- Docker and Docker Compose
+- Docker and Docker Compose (v1 or v2)
+  - `docker-compose` (v1) or `docker compose` (v2) - both supported
 - Node.js (v18 or higher)
 - Linux host (for best compatibility)
 - Root/sudo access (for privileged container)

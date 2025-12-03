@@ -1,7 +1,18 @@
 #!/bin/bash
 
+# Detect docker compose command
+if command -v docker-compose &> /dev/null; then
+    DOCKER_COMPOSE="docker-compose"
+elif docker compose version &> /dev/null; then
+    DOCKER_COMPOSE="docker compose"
+else
+    echo "✗ Docker Compose not found. Please install Docker Compose."
+    echo "  Visit: https://docs.docker.com/compose/install/"
+    exit 1
+fi
+
 echo "Building MCP Kali Server Docker image..."
-docker-compose build
+$DOCKER_COMPOSE build
 
 if [ $? -eq 0 ]; then
     echo "✓ Docker image built successfully"

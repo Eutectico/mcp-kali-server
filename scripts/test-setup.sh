@@ -53,12 +53,12 @@ fi
 
 # Check Docker Compose
 echo -n "Checking Docker Compose... "
-if docker compose version &> /dev/null; then
-    COMPOSE_VERSION=$(docker compose version --short)
-    echo -e "${GREEN}✓${NC} $COMPOSE_VERSION"
-elif command -v docker-compose &> /dev/null; then
+if command -v docker-compose &> /dev/null; then
     COMPOSE_VERSION=$(docker-compose --version | cut -d' ' -f3 | cut -d',' -f1)
-    echo -e "${GREEN}✓${NC} $COMPOSE_VERSION"
+    echo -e "${GREEN}✓${NC} v1 ($COMPOSE_VERSION)"
+elif docker compose version &> /dev/null; then
+    COMPOSE_VERSION=$(docker compose version --short 2>/dev/null || docker compose version | grep -oP 'v[\d.]+' | head -1)
+    echo -e "${GREEN}✓${NC} v2 ($COMPOSE_VERSION)"
 else
     echo -e "${RED}✗${NC} Docker Compose not found"
     errors=$((errors + 1))
