@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "kali": {
+      "command": "node",
+      "args": ["/workspace/mcp-kali-server/dist/index.js"],
+      "env": {}
+    }
+  }
+}

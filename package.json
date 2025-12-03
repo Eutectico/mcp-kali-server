@@ -1,0 +1,30 @@
+{
+  "name": "mcp-kali-server",
+  "version": "1.0.0",
+  "description": "MCP Server for Kali Linux security tools in Docker",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "start": "node dist/index.js",
+    "prepare": "npm run build"
+  },
+  "keywords": [
+    "mcp",
+    "kali-linux",
+    "security-tools",
+    "pentest"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.4",
+    "dockerode": "^4.0.2"
+  },
+  "devDependencies": {
+    "@types/dockerode": "^3.3.31",
+    "@types/node": "^22.10.1",
+    "typescript": "^5.7.2"
+  }
+}

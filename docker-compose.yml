@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  kali:
+    build: .
+    image: mcp-kali-server:latest
+    container_name: mcp-kali
+    privileged: true
+    network_mode: host
+    volumes:
+      - ./workspace:/workspace
+      - /var/run/docker.sock:/var/run/docker.sock
+    stdin_open: true
+    tty: true
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+      - SYS_ADMIN
+    security_opt:
+      - apparmor:unconfined

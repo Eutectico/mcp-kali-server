@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "kali": {
+      "command": "node",
+      "args": ["dist/index.js"],
+      "transport": "stdio",
+      "description": "Kali Linux security tools in Docker - provides nmap, nikto, sqlmap, and more penetration testing tools"
+    }
+  }
+}
