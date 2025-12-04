@@ -7,6 +7,34 @@ Stelle sicher, dass du folgendes installiert hast:
 - Node.js (v18+)
 - Claude CLI
 
+## Wie funktioniert das System?
+
+```
+┌─────────────────────────────────────┐
+│        HOST SYSTEM                  │
+│                                     │
+│  ┌─────────────────────────────┐   │
+│  │   MCP Server (Node.js)      │   │
+│  │   - Läuft auf Host          │   │
+│  │   - Greift auf Docker       │   │
+│  │     Socket zu               │   │
+│  │   - Managed Kali Container  │   │
+│  └──────────┬──────────────────┘   │
+│             │ Docker API            │
+│  ┌──────────▼──────────────────┐   │
+│  │   Docker                    │   │
+│  │  ┌───────────────────────┐  │   │
+│  │  │  Kali Container       │  │   │
+│  │  │  - Security Tools     │  │   │
+│  │  │  - Isoliert           │  │   │
+│  │  │  - KEIN Docker Zugriff│  │   │
+│  │  └───────────────────────┘  │   │
+│  └─────────────────────────────┘   │
+└─────────────────────────────────────┘
+```
+
+**Wichtig:** Der MCP Server läuft auf dem Host, NICHT im Container. Nur der Host-Server kann Docker-Container verwalten.
+
 ## Schritt-für-Schritt Anleitung
 
 ### 1. Repository klonen/kopieren

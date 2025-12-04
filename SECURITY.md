@@ -154,11 +154,13 @@ The `custom_command` tool executes arbitrary commands in the container. While co
 
 ### 2. Docker Socket Access
 
-The MCP server requires access to Docker socket:
+The MCP server (running on the host) requires access to Docker socket to manage the Kali container:
 
 - **Risk**: Docker socket access is equivalent to root access
-- **Mitigation**: Run MCP server with appropriate user permissions
+- **Scope**: Only the host-based MCP server has this access - the Kali container does NOT
+- **Mitigation**: Run MCP server with appropriate user permissions (add user to `docker` group)
 - **Alternative**: Use Docker contexts for remote Docker access
+- **Note**: The Kali container is isolated and cannot manage other containers
 
 ### 3. Sensitive Output
 

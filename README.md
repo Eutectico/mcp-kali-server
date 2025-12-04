@@ -17,6 +17,39 @@ A Model Context Protocol (MCP) server that provides access to Kali Linux securit
 - **Safe Isolation**: All tools run in a containerized environment
 - **Easy Management**: Simple scripts for container lifecycle management
 
+## Architecture
+
+```
+┌─────────────────────────────────────────────────────┐
+│                   HOST SYSTEM                       │
+│                                                     │
+│  ┌─────────────────────────────────────────────┐   │
+│  │   MCP Server (Node.js)                      │   │
+│  │   - Runs on host                            │   │
+│  │   - Accesses Docker socket                  │   │
+│  │   - Manages Kali container                  │   │
+│  │   - Implements MCP protocol                 │   │
+│  └──────────────┬──────────────────────────────┘   │
+│                 │ Docker API                        │
+│  ┌──────────────▼──────────────────────────────┐   │
+│  │          Docker Engine                      │   │
+│  │  ┌─────────────────────────────────────┐    │   │
+│  │  │   Kali Container (Isolated)         │    │   │
+│  │  │   - Security tools                  │    │   │
+│  │  │   - NO Docker socket access         │    │   │
+│  │  │   - Privileged for network tools    │    │   │
+│  │  │   - Host networking mode            │    │   │
+│  │  └─────────────────────────────────────┘    │   │
+│  └─────────────────────────────────────────────┘   │
+└─────────────────────────────────────────────────────┘
+```
+
+**Key Points:**
+- The MCP server runs **on the host**, not in Docker
+- Only the host MCP server has Docker socket access
+- The Kali container is **isolated** and cannot manage other containers
+- Commands flow: Claude → MCP Server → Docker API → Kali Container → Security Tools
+
 ## Security Tools Included
 
 - **Network Scanning**: nmap, masscan
