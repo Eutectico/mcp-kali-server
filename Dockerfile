@@ -50,7 +50,8 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # Install additional Python tools
-RUN pip3 install --no-cache-dir \
+# Note: --break-system-packages is safe in Docker containers
+RUN pip3 install --no-cache-dir --break-system-packages \
     impacket \
     pwntools \
     scapy
